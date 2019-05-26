@@ -8,10 +8,10 @@
         {{ error }}
       </div>
       <div class="form-group">
-        <input type="text" placeholder="Username" class="form-control" id="username" name="username" v-model="username">
+        <input type="text" placeholder="Username" class="form-control" id="username" name="username">
       </div>
       <div class="form-group">
-        <input type="password" placeholder="Password" class="form-control" id="password" name="password" v-model="password">
+        <input type="password" placeholder="Password" class="form-control" id="password" name="password">
       </div>
       <input type="submit" class="btn btn-dark"> 
     </form>
@@ -22,17 +22,25 @@
   export default {
     data () {
       return {
-        error: '',
-        username: '',
-        password: ''
+        error: ''
       }
     },
     methods: {
-      formSubmit: function () {
+      formSubmit: function (e) {
         // Check For User In DB
-        // If user user exists and password is correct
-        // this.$route.push(path to next route)
-        // else this.error = error
+        // If user with username exists and password is correct then login else error
+        let _this = this
+        this.$db.find({'user.username': e.target.querySelector('#username'), 'user.password': e.target.querySelector('#password').value}, function (err, user) {
+          if (err) {
+            _this.error = err
+            return
+          }
+          if (!user.length) {
+            _this.error = `The username or password you entered is incorrect.`
+            return
+          }
+          _this.$router.push({path: '/home'})
+        })
       }
     }
   }

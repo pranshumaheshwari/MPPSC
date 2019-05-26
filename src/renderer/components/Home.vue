@@ -3,7 +3,7 @@
     <div class="Login row">
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
-        <LoginForm />
+        <h2>Home</h2>
       </div>
       <div class="col-sm-3"></div>
     </div>
@@ -11,11 +11,8 @@
 </template>
 
 <script>
-  import LoginForm from './LandingPage/LoginForm'
-
   export default {
-    name: 'landing-page',
-    components: { LoginForm }
+    name: 'home'
   }
 </script>
 
@@ -28,9 +25,5 @@
       margin-left: 14vw;
       margin-top: 5vh;
     }
-  }
-  
-  .Login {
-    margin-top: 15%;
   }
 </style>
